@@ -1,0 +1,15 @@
+import com.intellij.openapi.diagnostic.Logger
+
+// log level is INFO
+// Unfortunately, I cannot find the way to change the log level...
+def log = Logger.getInstance("my.gdsl")
+
+def apiCtx = context(pathRegexp: '(.*/dsl/.*\\.groovy)', scope: scriptScope())
+
+
+contributor(apiCtx) {
+  // Non generic method definition
+  method name: 'foo', params: [cl: "java.util.function.Function<String, String>"]
+  // Generic method definition
+  method name: 'bar', params: [class: "java.lang.Class<T>", cl: "java.util.function.Function<T, String>"]
+}
